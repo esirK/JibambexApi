@@ -10,9 +10,14 @@ class MovieSerializer(serializers.ModelSerializer):
 
 
 class MoviesCategoriesSerializer(serializers.ModelSerializer):
-    # movies = serializers.StringRelatedField(many=True)
+    class Meta:
+        model = MoviesCategories
+        fields = ('name', 'id', )
+
+
+class SingleCategorySerializer(serializers.ModelSerializer):
     movies = MovieSerializer(many=True, read_only=True)
 
     class Meta:
         model = MoviesCategories
-        fields = ('name', 'movies')
+        fields = ('movies',)
