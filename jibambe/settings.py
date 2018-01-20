@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'jibambe.movies',
     'rest_framework',
-    'movies.apps.MoviesConfig'
 ]
 
 MIDDLEWARE = [
@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'jibambeApi.urls'
+ROOT_URLCONF = 'jibambe.urls'
 
 TEMPLATES = [
     {
@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'jibambeApi.wsgi.application'
+WSGI_APPLICATION = 'jibambe.wsgi.application'
 
 
 # Database
