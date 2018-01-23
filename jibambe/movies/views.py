@@ -8,7 +8,7 @@ from jibambe.movies.serializers import MoviesCategoriesSerializer, SingleCategor
 
 class MoviesCategoriesList(APIView):
     """
-    List All MovieCategories together with their movies
+    List All MovieCategories
     """
 
     def get(self, request):
@@ -31,4 +31,15 @@ class MovieCategoryDetails(APIView):
     def get(self, request, pk):
         movie_category = self.get_object(pk)
         serializer = SingleCategorySerializer(movie_category, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data[0]['movies'])
+
+
+def add_categories(data):
+    movies_category = MoviesCategoriesSerializer(data=data)
+    if movies_category.is_valid():
+        movies_category.save()
+        print("Category Saved Successfully")
+        return 0
+    else:
+        print("Error saving category")
+        return -1
