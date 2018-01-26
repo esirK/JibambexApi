@@ -6,7 +6,7 @@ from jibambe.movies.models import MoviesCategories, Movie
 class MovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
-        fields = ('name', 'thumbnail', 'source_url', 'duration')
+        fields = ('name', 'thumbnail', 'source_url', 'duration', 'category')
 
 
 class MoviesCategoriesSerializer(serializers.ModelSerializer):
