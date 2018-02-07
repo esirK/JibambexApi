@@ -3,7 +3,7 @@ import urllib.parse
 from django.core.management import BaseCommand
 
 from jibambe.movies.models import MoviesCategories
-from jibambe.movies.serializers import MoviesCategoriesSerializer, MovieSerializer
+from jibambe.movies.serializers import MovieSerializer
 
 from termcolor import colored
 
@@ -11,11 +11,11 @@ import subprocess
 
 
 class Command(BaseCommand):
-    help = "Populates Database with movie data"
+    help = "Populates Database with movies data"
 
     def handle(self, *args, **options):
         import os
-        url = "http://192.168.1.143:8000/static/movies/categories/"
+        url = "http://192.168.1.143:8080/static/movies/categories/"
 
         os.chdir('jibambe/movies/static/movies/categories')
         # List all directories in the categories folder
@@ -70,8 +70,6 @@ class Command(BaseCommand):
                             source_url = url + category + '/' + file + '/' + movie
                             source_url = urllib.parse.quote(source_url, safe=":,/")
 
-                            print('Source', source_url)
-
                             # Get movie duration
                             metadata = subprocess.Popen(["ffprobe", movie], stdout=subprocess.PIPE,
                                                         stderr=subprocess.STDOUT)
@@ -83,10 +81,9 @@ class Command(BaseCommand):
                                     print("Thumbnail ", movie_thumbnail)
                                     cat = MoviesCategories.objects.filter(name=category).first()
                                     cat_id = cat.id
-
                     videos = MovieSerializer(
                         data={'name': movie[:-4], 'thumbnail': movie_thumbnail,
-                              'source_url': source_url, 'duration': duration, 'category': cat_id})
+                              'source_url': source_url, 'duration': duration[:-3], 'category': cat_id})
 
                     print(colored("Trying to add '{0}' into {1}", 'magenta').format(
                         movie[:-4], category))

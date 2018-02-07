@@ -7,12 +7,12 @@ from jibambe.movies.serializers import MoviesCategoriesSerializer
 
 
 class Command(BaseCommand):
-    help = "Populates Database with movie data"
+    help = "Populates Database with movie Categories"
 
     def handle(self, *args, **options):
         # Loop through 'static/movies/categories' picking the category name and and image
         import os
-        url = "http://192.168.1.143:8000/static/movies/categories/"
+        url = "http://192.168.1.143:8080/static/movies/categories/"
 
         os.chdir('jibambe/movies/static/movies/categories')
         # List all directories in the categories folder
