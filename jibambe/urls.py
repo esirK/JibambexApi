@@ -22,4 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('moviescategories/', views.MoviesCategoriesList.as_view()),
     path('moviescategories/<pk>', views.MovieCategoryDetails.as_view()),
+    path('series/', views.SeriesList.as_view()),
+    path('series/<pk>', views.SingleSeries.as_view()),
 ]
