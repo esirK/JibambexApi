@@ -24,4 +24,5 @@ urlpatterns = [
     path('moviescategories/<pk>', views.MovieCategoryDetails.as_view()),
     path('series/', views.SeriesList.as_view()),
     path('series/<pk>', views.SingleSeries.as_view()),
+    path('episodes/<pk>', views.Episodes.as_view()),
 ]

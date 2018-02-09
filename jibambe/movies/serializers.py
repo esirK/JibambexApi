@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from jibambe.movies.models import MoviesCategories, Movie, Series, Season
+from jibambe.movies.models import MoviesCategories, Movie, Series, Season, Episode
 
 
 class MovieSerializer(serializers.ModelSerializer):
@@ -40,3 +40,10 @@ class SerieSerializer(serializers.ModelSerializer):
         fields = ('name', 'thumbnail', 'seasons', 'id')
 
 
+class EpisodeSerializer(serializers.ModelSerializer):
+    """
+    Serializer for a single episode
+    """
+    class Meta:
+        model = Episode
+        fields = ('name', 'thumbnail', 'source_url', "duration", "season")

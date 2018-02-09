@@ -51,3 +51,19 @@ class Season(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Episode(models.Model):
+    """
+    Model for a single Episode in a season
+    """
+    name = models.CharField(max_length=1000, null=False, unique=False)
+    thumbnail = models.TextField(max_length=1200, null=False)
+    source_url = models.CharField(max_length=5000, null=False, unique=True)
+    duration = models.CharField(max_length=100, null=False)
+    season = models.ForeignKey(Season, related_name="episodes", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+
