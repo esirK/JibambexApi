@@ -4,8 +4,8 @@ import urllib
 from django.core.management import BaseCommand
 from termcolor import colored
 
-from jibambe.movies.models import Season
-from jibambe.movies.serializers import EpisodeSerializer
+from movies.models import Season
+from movies.serializers import EpisodeSerializer
 
 
 class Command(BaseCommand):
@@ -13,7 +13,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         import os
-        os.chdir('jibambe/movies/static/series')
+        os.chdir('movies/static/series')
         # List all directories in the series folder
         series = os.listdir('.')
 

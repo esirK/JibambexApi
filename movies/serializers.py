@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from jibambe.movies.models import MoviesCategories, Movie, Series, Season, Episode
+from .models import MoviesCategories, Movie, Series, Season, Episode
 
 
 class MovieSerializer(serializers.ModelSerializer):

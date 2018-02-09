@@ -2,8 +2,8 @@ from django.http import Http404
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from jibambe.movies.models import MoviesCategories, Series, Season
-from jibambe.movies.serializers import MoviesCategoriesSerializer, SingleCategorySerializer, SerieSerializer, \
+from .models import MoviesCategories, Series, Season
+from .serializers import MoviesCategoriesSerializer, SingleCategorySerializer, SerieSerializer, \
     EpisodeSerializer
 
 
@@ -39,6 +39,7 @@ class SeriesList(APIView):
     """
     Displays all series available
     """
+
     def get(self, request):
         series = Series.objects.all()
         serializer = SerieSerializer(series, many=True)
@@ -53,6 +54,7 @@ class SingleSeries(APIView):
     """
     Display contents of a single series
     """
+
     def get(self, request, pk):
         seasons = Series.objects.filter(pk=pk).all()
         serializer = SerieSerializer(seasons, many=True)
@@ -64,6 +66,7 @@ class Episodes(APIView):
     """
     Displays all episodes in a season
     """
+
     def get(self, request, pk):
         season = Season.objects.filter(pk=pk).first()
         if season is None:

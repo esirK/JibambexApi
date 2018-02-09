@@ -2,8 +2,8 @@ import urllib.parse
 
 from django.core.management import BaseCommand
 
-from jibambe.movies.models import MoviesCategories
-from jibambe.movies.serializers import MovieSerializer
+from movies.models import MoviesCategories
+from movies.serializers import MovieSerializer
 
 from termcolor import colored
 
@@ -17,7 +17,7 @@ class Command(BaseCommand):
         import os
         url = "http://192.168.1.143:8080/static/movies/categories/"
 
-        os.chdir('jibambe/movies/static/movies/categories')
+        os.chdir('movies/static/movies/categories')
         # List all directories in the categories folder
         categories = os.listdir('.')
 
