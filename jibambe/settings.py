@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'movies',
+
+    'accounts',
 ]
 
 MIDDLEWARE = [

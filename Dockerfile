@@ -1,11 +1,11 @@
 # Use an official Python runtime as a parent image
 FROM python:jessie
 
-# Set the working directory to /app
-WORKDIR .
+# Set the working directory to /jibambex
+WORKDIR /jibambex
 
-# Copy the current directory contents into the container at /jibambe
-ADD . /jibambe
+# Copy the current directory contents into the container at /jibambex
+ADD . /jibambex
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --trusted-host pypi.python.org -r requirements.txt

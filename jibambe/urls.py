@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 from movies import views
+from accounts import views as accounts_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +26,6 @@ urlpatterns = [
     path('series/', views.SeriesList.as_view()),
     path('series/<pk>', views.SingleSeries.as_view()),
     path('episodes/<pk>', views.Episodes.as_view()),
+    path('register/', accounts_views.UserCreate.as_view()),
+    path('login/', accounts_views.UserLogin.as_view())
 ]
