@@ -9,6 +9,7 @@ class JibambeUser(models.Model):
     loggedin = models.BooleanField(default=False)
     subscription_expired = models.BooleanField(default=True)
     subscription_expire = models.DateTimeField(default=datetime.datetime(1994, 3, 6, 6, 2, 53, 59037))
+    device_mac = models.CharField(unique=False, default='00:00:00:00', max_length=100)
 
     def __str__(self):
         return self.phone_number
