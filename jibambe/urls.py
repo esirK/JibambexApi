@@ -26,6 +26,6 @@ urlpatterns = [
     path('series/', views.SeriesList.as_view()),
     path('series/<pk>', views.SingleSeries.as_view()),
     path('episodes/<pk>', views.Episodes.as_view()),
-    path('register/', accounts_views.UserCreate.as_view()),
+    path('topupaccount/', accounts_views.AccountTopUp.as_view()),
     path('login/', accounts_views.UserLogin.as_view())
 ]

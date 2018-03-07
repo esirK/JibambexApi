@@ -1,12 +1,19 @@
 from rest_framework import serializers
 
-from accounts.models import JibambeUser
+from accounts.models import JibambeUser, JibambePayment
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = JibambeUser
         fields = ('phone_number', 'password', 'balance')
+
+
+class UserPaymentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = JibambePayment
+        fields = ('sender_phone', 'first_name', 'middle_name', 'last_name', 'amount',
+                  'transaction_reference', 'transaction_timestamp')
 
 
 class UserLoginSerializer(serializers.ModelSerializer):
