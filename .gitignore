@@ -109,3 +109,4 @@ venv.bak/
 static
 db.sqlite3
 .DS_Store
+*/migrations

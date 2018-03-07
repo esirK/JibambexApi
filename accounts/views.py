@@ -13,6 +13,7 @@ Receives post requests and updates user account balances
 
 class AccountTopUp(APIView):
     def post(self, request, format='json'):
+        print("Received {0}".format(request.data))
         user_phone = request.data.get('sender_phone')
         user_phone = format_phone_number(user_phone)
 
