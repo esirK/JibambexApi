@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import dj_database_url
+from django.conf.global_settings import DATABASES
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
@@ -28,7 +31,8 @@ ALLOWED_HOSTS = [
     "192.168.10.226",
     "127.0.0.1",
     "192.168.44.140",
-    "192.168.1.143"
+    "192.168.1.143",
+    "jibambe-payment-endpoint.herokuapp.com"
 ]
 
 # Application definition
@@ -80,13 +84,13 @@ WSGI_APPLICATION = 'jibambe.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+DATABASES['default'] = dj_database_url.parse('postgres://mqqgnwuheclbjk:b3e31232f7c95abaefb4352c37bb8a308f8887d8a2a31af160de4cc8f70dead9@ec2-54-204-46-60.compute-1.amazonaws.com:5432/d4sveeg6dtn7k', conn_max_age=600)
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
