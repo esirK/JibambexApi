@@ -12,7 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
 class UserPaymentSerializer(serializers.ModelSerializer):
     class Meta:
         model = JibambePayment
-        fields = ('sender_phone', 'first_name', 'middle_name', 'last_name', 'amount',
+        fields = ('sender_phone', 'first_name', 'last_name', 'amount',
                   'transaction_reference', 'transaction_timestamp')
 
 
