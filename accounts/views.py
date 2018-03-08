@@ -3,6 +3,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from accounts.authenticaiton import QuietBasicAuthentication
 from accounts.models import JibambeUser
 from accounts.serializers import LoggedInUser, UserPaymentSerializer, UserSerializer
 
@@ -12,6 +13,8 @@ Receives post requests and updates user account balances
 
 
 class AccountTopUp(APIView):
+    authentication_classes = (QuietBasicAuthentication,)
+
     def post(self, request, format='json'):
         print("Received {0}".format(request.data))
         user_phone = request.data.get('sender_phone')
@@ -81,7 +84,7 @@ def user_in_database(user_phone_number):
 
 
 def update_user_details(user, data):
-    user.balance = int(user.balance) + int(data.get('amount'))
+    user.balance = float(user.balance) + float(data.get('amount'))
     user.save()
     response = {"status": "01", "description": "Accepted",
                 "subscriber_message": "You ToppedUp Successfully. New Account balance is {0}. Your account details are "
@@ -113,7 +116,7 @@ def add_user_to_database(data):
             if jibambe_user_serializer.is_valid():
                 jibambe_user_serializer.save()
                 response = {"status": "01", "description": "Accepted",
-                            "subscriber_message": "Welcome to Jibambe na Ma Movie. Your account details are " \
+                            "subscriber_message": "Welcome to Jibambe na Ma Movie. Your account details are "
                                                   "Phone:{0} Password: {1}".format(user_phone, user_password)}
                 return response, status.HTTP_200_OK
             else:
@@ -146,8 +149,8 @@ def check_password(user, password):
 
 def subscribe_user(user):
     if user.subscription_expired:
-        if int(user.balance) >= 20:
-            user.balance = int(user.balance) - 20
+        if float(user.balance) >= 20:
+            user.balance = float(user.balance) - 20
             user.subscription_expired = False
             user.subscription_expire = datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=24)
             return user
