@@ -1,4 +1,7 @@
+import ast
 import datetime
+import json
+
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -15,17 +18,21 @@ Receives post requests and updates user account balances
 class AccountTopUp(APIView):
     authentication_classes = (QuietBasicAuthentication,)
 
-    def post(self, request, format='json'):
-        print("Received {0}".format(request.data))
-        user_phone = request.data.get('sender_phone')
+    def post(self, request):
+        data_to_use = request.body.decode("utf-8")
+        data_to_use = data_to_use.replace("'", "\"")
+        data_to_use = json.loads(data_to_use)
+        print("Received {0}: TYPE: {1}".format(data_to_use, type(data_to_use)))
+
+        user_phone = data_to_use.get('sender_phone')
         user_phone = format_phone_number(user_phone)
 
         user = user_in_database(user_phone)
         if user:
-            updated_user = update_user_details(user, request.data)
+            updated_user = update_user_details(user, data_to_use)
             return Response(updated_user, status=status.HTTP_200_OK)
         else:
-            result, status_code = add_user_to_database(request.data)
+            result, status_code = add_user_to_database(data_to_use)
             return Response(result, status=status_code)
 
 
@@ -84,6 +91,16 @@ def user_in_database(user_phone_number):
 
 
 def update_user_details(user, data):
+    serializer = UserPaymentSerializer(data=data)
+    print("Hey LoooooookUpdate {0}".format(serializer.is_valid()))
+    # print(serializer.data)
+    if serializer.is_valid():
+        serializer.save()
+        print("Updated Data")
+        print(serializer.validated_data)
+    else:
+        print("Errors")
+        print(serializer.errors)
     user.balance = float(user.balance) + float(data.get('amount'))
     user.save()
     response = {"status": "01", "description": "Accepted",
@@ -99,8 +116,12 @@ Registers a new user into the Jibambe system
 
 def add_user_to_database(data):
     serializer = UserPaymentSerializer(data=data)
+    print("Hey LoooooookAdd {0}".format(serializer.is_valid()))
+    # print(serializer.data)
     if serializer.is_valid():
         user = serializer.save()
+        print("Saved Data")
+        print(serializer.validated_data)
         if user:
             user_data = {}
             user_phone = data.get('sender_phone')
