@@ -2,7 +2,9 @@ import ast
 import datetime
 import json
 
+from django.contrib.auth.models import AnonymousUser
 from rest_framework import status
+from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -73,6 +75,20 @@ class UserLogin(APIView):
             print(e)
             return Response({"message": "User Does not Exist"})
 
+
+class Users(APIView):
+    """
+    Gets all users in the database
+    """
+    authentication_classes = (QuietBasicAuthentication,)
+
+    def get(self, request):
+        if request.user != AnonymousUser:
+            users = JibambeUser.objects.all()
+            user_s = UserSerializer(users, many=True)
+            return Response(user_s.data)
+        else:
+            return Response({"Not Authenticated"})
 
 """
 Checks if User is already in Database.
