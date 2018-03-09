@@ -1,10 +1,10 @@
-import ast
+from random import randint
+
 import datetime
 import json
 
 from django.contrib.auth.models import AnonymousUser
 from rest_framework import status
-from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -90,6 +90,7 @@ class Users(APIView):
         else:
             return Response({"Not Authenticated"})
 
+
 """
 Checks if User is already in Database.
 
@@ -143,7 +144,7 @@ def add_user_to_database(data):
             user_phone = data.get('sender_phone')
             user_phone = format_phone_number(user_phone)
 
-            user_password = "1111"
+            user_password = random_4_digit_password(4)
             user_data['phone_number'] = user_phone
             user_data['balance'] = data.get('amount')
             user_data['password'] = user_password
@@ -207,3 +208,14 @@ def user_is_already_loggedin(user, request):
         return True
     else:
         return False
+
+
+""""
+Generates four digit random numbers to be used as password
+"""
+
+
+def random_4_digit_password(n):
+    range_start = 10 ** (n - 1)
+    range_end = (10 ** n) - 1
+    return randint(range_start, range_end)
