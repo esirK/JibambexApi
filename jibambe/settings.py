@@ -82,14 +82,15 @@ WSGI_APPLICATION = 'jibambe.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-DATABASES['default'] = dj_database_url.parse('postgres://kxelpkuzvebmun:5468ff621aac04bfbd48917f30e87be7d66d1202468ebd159266abbc7bdf0946@ec2-23-21-166-148.compute-1.amazonaws.com:5432/d2i6akq5sino88', conn_max_age=600)
-# Password validation
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+# DATABASES['default'] = dj_database_url.parse(
+# 'postgres://kxelpkuzvebmun:5468ff621aac04bfbd48917f30e87be7d66d1202468ebd159266abbc7bdf0946@ec2-23-21-166-148
+# .compute-1.amazonaws.com:5432/d2i6akq5sino88', conn_max_age=600) Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [

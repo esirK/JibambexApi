@@ -6,7 +6,7 @@ from accounts.models import JibambeUser, JibambePayment
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = JibambeUser
-        fields = ('phone_number', 'password', 'balance')
+        fields = ('phone_number', 'password', 'balance', 'previous_balance', "online_balance")
 
 
 class UserPaymentSerializer(serializers.ModelSerializer):
