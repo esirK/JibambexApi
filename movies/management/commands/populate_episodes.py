@@ -13,11 +13,11 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         import os
-        os.chdir('movies/static/series')
+        os.chdir(os.getenv("STATIC")+'/static/series')
         # List all directories in the series folder
         series = os.listdir('.')
 
-        url = "http://192.168.1.143:8080/static/series/"
+        url = os.getenv("IP")+"/static/series/"
 
         for single_series in series:
 

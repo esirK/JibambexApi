@@ -15,9 +15,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         import os
-        url = "http://192.168.1.143:8080/static/movies/categories/"
+        url = os.getenv("IP")+"/static/movies/categories/"
 
-        os.chdir('movies/static/movies/categories')
+        os.chdir(os.getenv("STATIC")+'/static/movies/categories')
         # List all directories in the categories folder
         categories = os.listdir('.')
 

@@ -12,9 +12,11 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         # Loop through 'static/movies/categories' picking the category name and and image
         import os
-        url = "http://192.168.1.143:8080/static/movies/categories/"
+        url = os.getenv("IP")+"/static/movies/categories/"
 
-        os.chdir('movies/static/movies/categories')
+        print("The URL is "+url)
+
+        os.chdir(os.getenv("STATIC")+'/static/movies/categories')
         # List all directories in the categories folder
         categories = os.listdir('.')
 
