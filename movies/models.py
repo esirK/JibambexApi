@@ -2,10 +2,11 @@ from datetime import timedelta
 
 from django.db import models
 
-# Here we will have model for categories of movies and a Movie Item
-
 
 class MoviesCategories(models.Model):
+    """
+    Model for a single movie Category eg. Action, Animation, Horror etc.
+    """
     name = models.CharField(max_length=250, null=False, unique=True)
     thumbnail = models.TextField(blank=True)
 

@@ -23,6 +23,8 @@ class Command(BaseCommand):
 
         for category in categories:
 
+            if category.startswith("."):
+                continue
             os.chdir(category)
             print(colored("Searching inside {0}", 'blue').format(category))
 
@@ -62,7 +64,7 @@ class Command(BaseCommand):
                             # Encode the url
                             movie_thumbnail = urllib.parse.quote(movie_thumbnail, safe=":,/")
 
-                            print('Thumbnail', movie_thumbnail)
+                            print('Thumbnail>>>>>>>>> ', movie_thumbnail)
 
                     for movie in os.listdir('.'):
                         if movie.endswith(".jpg") | movie.endswith(".png") | movie.endswith('.jpeg'):

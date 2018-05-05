@@ -14,15 +14,16 @@ class Command(BaseCommand):
         import os
         url = os.getenv("IP")+"/static/movies/categories/"
 
-        print("The URL is "+url)
-
         os.chdir(os.getenv("STATIC")+'/static/movies/categories')
+
         # List all directories in the categories folder
         categories = os.listdir('.')
 
         for category in range(0, len(categories)):
             category = categories[category]
             # Loop through each category picking its name and its thumbnail
+            if category.startswith("."):
+                continue
             os.chdir(category)
             print(colored("Searching inside {0}", 'blue').format(category))
 
