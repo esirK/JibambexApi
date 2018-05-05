@@ -73,7 +73,7 @@ class UserLogin(APIView):
             return Response({"message": "Phone number or password wrong"})
         except Exception as e:
             print(e)
-            return Response({"message": "User Does not Exist"})
+            return Response({"message": "Please Register first."})
 
 
 class Users(APIView):

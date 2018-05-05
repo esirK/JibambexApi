@@ -41,7 +41,7 @@ class SeriesList(APIView):
     """
 
     def get(self, request):
-        series = Series.objects.all()
+        series = Series.objects.all().order_by('name')
         serializer = SerieSerializer(series, many=True)
 
         # replace all seasons in a series with the number of seasons available

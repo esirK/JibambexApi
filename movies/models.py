@@ -12,6 +12,9 @@ class MoviesCategories(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ('name',)
+
 
 class Movie(models.Model):
     name = models.CharField(max_length=1000, null=False, unique=True)
@@ -24,9 +27,6 @@ class Movie(models.Model):
     def __str__(self):
         return self.name
 
-    class Meta:
-        ordering = ('added_on',)
-
 
 class Series(models.Model):
     name = models.CharField(max_length=1000, null=False, unique=True)
@@ -38,6 +38,7 @@ class Series(models.Model):
 
     class Meta:
         verbose_name_plural = "Series"
+        ordering = ('name',)
 
 
 class Season(models.Model):
@@ -66,4 +67,6 @@ class Episode(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ('name',)
 
