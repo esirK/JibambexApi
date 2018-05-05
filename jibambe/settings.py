@@ -32,6 +32,7 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     "192.168.44.140",
     "192.168.1.143",
+    "192.168.0.32",
     "jibambe-payment-endpoint.herokuapp.com"
 ]
 
@@ -83,9 +84,15 @@ WSGI_APPLICATION = 'jibambe.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # },
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'movies',
+        'ENGINE': 'django.db.backends.mysql',
+        'USER': 'jibambe',
+        'PASSWORD': 'Jibambe2018'
     }
 }
 # DATABASES['default'] = dj_database_url.parse(
