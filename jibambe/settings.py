@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
-import os
+import os, sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import dj_database_url
@@ -45,9 +45,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_nose',
     'rest_framework',
     'accounts',
     'movies',
+]
+# Use nose to run all tests
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+# Tell nose to measure coverage on the 'foo' and 'bar' apps
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=movies,accounts',
+    '--cover-html',
 ]
 
 MIDDLEWARE = [
@@ -95,6 +105,12 @@ DATABASES = {
         'PASSWORD': 'Jibambe2018'
     }
 }
+# Use different database for tests
+if 'test' in sys.argv:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 # DATABASES['default'] = dj_database_url.parse(
 # 'postgres://kxelpkuzvebmun:5468ff621aac04bfbd48917f30e87be7d66d1202468ebd159266abbc7bdf0946@ec2-23-21-166-148
 # .compute-1.amazonaws.com:5432/d2i6akq5sino88', conn_max_age=600) # Password validation #
