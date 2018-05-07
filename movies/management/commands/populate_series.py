@@ -19,6 +19,8 @@ class Command(BaseCommand):
         thumbnail = ""
 
         for single_series in series:
+            if single_series.startswith("."):
+                continue
             # Pick the series name and inside its folder, pick its thumbnail
             os.chdir(single_series)
             seasons = os.listdir('.')  # All seasons are contained inside a single series folder
