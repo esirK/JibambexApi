@@ -11,8 +11,8 @@ from accounts.serializers import UserSerializer
 class Command(BaseCommand):
     def handle(self, *args, **options):
         # Load Upstream Database to the local Db
-        users = requests.get("https://jibambe-payment-endpoint.herokuapp.com/users",
-                             auth=HTTPBasicAuth(username="esirk", password="Andela2017#"))
+        users = requests.get("https://jibambe-kopokopo.herokuapp.com/users",
+                             auth=HTTPBasicAuth(username="jibambe", password="Jibambe2017#"))
         print("Received {0}".format(users))
         current_users = JibambeUser.objects.all()
         serialized_users = UserSerializer(current_users, many=True)
