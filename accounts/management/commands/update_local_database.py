@@ -1,5 +1,6 @@
 import json
 
+import os
 import requests
 from django.core.management import BaseCommand
 from requests.auth import HTTPBasicAuth
@@ -12,7 +13,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         # Load Upstream Database to the local Db
         users = requests.get("https://jibambe-kopokopo.herokuapp.com/users",
-                             auth=HTTPBasicAuth(username="jibambe", password="Jibambe2017#"))
+                             auth=HTTPBasicAuth(username=os.getenv("USERNAME"), password=os.getenv("PASSWORD")))
         print("Received {0}".format(users))
         current_users = JibambeUser.objects.all()
         serialized_users = UserSerializer(current_users, many=True)
