@@ -32,6 +32,7 @@ class Command(BaseCommand):
             # Delete all series in the database
             cursor.execute("delete from movies_series")
             cursor.execute("ALTER TABLE movies_series AUTO_INCREMENT=0;")
+            print("Deleted all series from Database :)")
 
-            print(cursor.fetchall())
-        pass
+
+
