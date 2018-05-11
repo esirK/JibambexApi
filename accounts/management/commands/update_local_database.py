@@ -45,6 +45,7 @@ class Command(BaseCommand):
                                                                               - float(user_to_update.online_balance))
                     user_to_update.previous_balance = user_to_update.balance
                     user_to_update.online_balance = online_user.get("balance")
+                    user_to_update.password = online_user.get("password")
                     user_to_update.save()
 
         if found:

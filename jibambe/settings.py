@@ -33,6 +33,7 @@ ALLOWED_HOSTS = [
     "192.168.44.140",
     "192.168.1.143",
     "192.168.0.32",
+    "192.168.10.89",
     "jibambe-payment-endpoint.herokuapp.com"
 ]
 
