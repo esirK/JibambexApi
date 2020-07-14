@@ -137,11 +137,7 @@ Determines if a user should be logged in or not
 
 
 def check_password(user, password):
-    if user.password == password:
-        return True
-    else:
-        return False
-
+    return user.password == password
 
 def subscribe_user(user):
     if user.subscription_expired:
